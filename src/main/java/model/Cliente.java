@@ -15,4 +15,6 @@ public class Cliente extends BaseEntity {
 
     private String nome;
 
+    private SexoCliente sexo;
+
 }
