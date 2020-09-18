@@ -29,4 +29,7 @@ public class Pedido extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
+    @Embedded
+    private EnderecoEntrega enderecoEntrega;
+
 }
