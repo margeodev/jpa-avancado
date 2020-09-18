@@ -2,9 +2,7 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,6 +16,7 @@ public class PagamentoCartao extends BaseEntity {
     @Column(name = "pedido_id")
     private Long pedidoId;
 
+    @Enumerated(EnumType.STRING)
     private StatusPagamento status;
 
     private String numero;

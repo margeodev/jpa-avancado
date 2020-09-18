@@ -2,6 +2,7 @@ package utilstest;
 
 import model.Cliente;
 import model.Produto;
+import model.SexoCliente;
 
 import java.math.BigDecimal;
 
@@ -18,6 +19,7 @@ public class UtilsTest {
     public static Cliente buildCliente() {
         return Cliente.builder()
                 .nome("Maria Pereira")
+                .sexo(SexoCliente.FEMININO)
                 .build();
     }
 }
