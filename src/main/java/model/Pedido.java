@@ -26,6 +26,9 @@ public class Pedido extends BaseEntity {
 
     private BigDecimal total;
 
+    @ManyToOne
+    private Cliente cliente;
+
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
