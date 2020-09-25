@@ -2,9 +2,8 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +16,13 @@ public class Categoria extends BaseEntity {
 
     private String nome;
 
-    @Column(name = "categoria_pai_id")
-    private Long categoriaPaiId;
+    @JoinColumn(name = "categoria_pai_id")
+    @ManyToOne
+    private Categoria categoriaPai;
 
+//    @ManyToMany(mappedBy = "categorias")
+//    private List<Produto> produtos;
+
+//    @OneToMany(mappedBy = "categoriaPai")
+//    private List<Categoria> categorias;
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,7 +27,11 @@ public class Pedido extends BaseEntity {
 
     private BigDecimal total;
 
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens;
+
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @Enumerated(EnumType.STRING)
