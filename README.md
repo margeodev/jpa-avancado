@@ -159,3 +159,25 @@ public class Categoria extends BaseEntity {
 }
 
 ```
+
+### 4.9. Mapeamento relacionamentos um-para-um com @OneToOne
+No relacionamento **um-para-um** deve ser definida uma entidade owner, a non-owner é opcional, o mapeamento da entidade non-owner não altera a estrutura da tabela no banco.
+
+Entidade principal
+```
+@Entity
+public class PagamentoCartao extends BaseEntity {
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
+}
+```
+Entidade secundária (opcional)
+```
+@Entity
+public class Pedido extends BaseEntity {
+    @OneToOne(mappedBy = "pedido")
+    private PagamentoCartao pagamentoCartao;
+}
+```
+
