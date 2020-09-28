@@ -40,6 +40,14 @@ public class UtilsTest {
                 .build();
     }
 
+    public static NotaFiscal buildNotaFiscal(Pedido pedido) {
+        return NotaFiscal.builder()
+                .xml("TESTE")
+                .dataEmissao(new Date())
+                .pedido(pedido)
+                .build();
+    }
+
     private static EnderecoEntrega buildEndereco() {
         return EnderecoEntrega.builder()
                 .bairro("Centro")

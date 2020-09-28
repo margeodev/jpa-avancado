@@ -2,9 +2,7 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
@@ -16,8 +14,9 @@ import java.util.Date;
 @Table(name = "nota_fiscal")
 public class NotaFiscal extends BaseEntity {
 
-    @Column(name = "pedido_id")
-    private Long pedidoId;
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
     private String xml;
 

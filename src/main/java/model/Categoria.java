@@ -20,9 +20,9 @@ public class Categoria extends BaseEntity {
     @ManyToOne
     private Categoria categoriaPai;
 
-//    @ManyToMany(mappedBy = "categorias")
-//    private List<Produto> produtos;
+    @ManyToMany(mappedBy = "categorias")
+    private List<Produto> produtos;
 
-//    @OneToMany(mappedBy = "categoriaPai")
-//    private List<Categoria> categorias;
+    @OneToMany(mappedBy = "categoriaPai")
+    private List<Categoria> categorias;
 }
