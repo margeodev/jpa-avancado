@@ -40,4 +40,7 @@ public class Pedido extends BaseEntity {
     @Embedded
     private EnderecoEntrega enderecoEntrega;
 
+    @OneToOne(mappedBy = "pedido")
+    private PagamentoCartao pagamentoCartao;
+
 }

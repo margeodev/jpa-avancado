@@ -13,8 +13,9 @@ import javax.persistence.*;
 @Table(name = "pagamento_cartao")
 public class PagamentoCartao extends BaseEntity {
 
-    @Column(name = "pedido_id")
-    private Long pedidoId;
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
     @Enumerated(EnumType.STRING)
     private StatusPagamento status;

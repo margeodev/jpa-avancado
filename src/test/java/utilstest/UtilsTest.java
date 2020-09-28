@@ -32,6 +32,14 @@ public class UtilsTest {
                 .build();
     }
 
+    public static PagamentoCartao buildPagamentoCartao(Pedido pedido) {
+        return PagamentoCartao.builder()
+                .numero("1234")
+                .status(StatusPagamento.PROCESSANDO)
+                .pedido(pedido)
+                .build();
+    }
+
     private static EnderecoEntrega buildEndereco() {
         return EnderecoEntrega.builder()
                 .bairro("Centro")
