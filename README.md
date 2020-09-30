@@ -239,3 +239,26 @@ public void analisarEstados() {
     entityManager.detach(cliente1); // Estado Detached
 }
 ```
+
+### 5.2. Entendendo o cache de primeiro nível
+Uma entidade buscada no banco fica no cache de primeiro nível 
+```
+@Test
+public void verificarCache() {
+    Cliente cliente = entityManager.find(Cliente.class, 1L); // O retorno desse método traz um objeto e deixa ele no cache 1
+    Cliente cliente2 = entityManager.find(Cliente.class, cliente.getId()) // Verifica se o objeto já está em cache, como o objeto está em cache, não faz uma nova consulta ao banco    
+}
+```
+
+## 5.6. Callbacks para eventos do ciclo de vida
+Callbacks são métodos que podem ser criados, geralmente na classe modelo, a partir de anotações e serão executados de acordo com o ciclo de vida da entidade.
+* @PrePersist - Um método com essa anotação é executado antes do objeto gerenciado ser persistido.
+* @PreUpdate -  Um método com essa anotação é executado antes do objeto gerenciado ser atualizado.
+* @PostPersist -  Um método com essa anotação é executado após do objeto gerenciado ser persistido.
+* @PostUpdate -  Um método com essa anotação é executado após do objeto gerenciado ser atualizado.
+```
+@PrePersist
+public void aoPersistir() {
+    dataCriacao = LocalDateTime.now();
+}
+```
