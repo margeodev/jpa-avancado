@@ -1,13 +1,11 @@
-package mapeamentobasico.relacionamentos;
+package relacionamentos;
 
 import model.Cliente;
 import model.Pedido;
 import org.junit.Assert;
 import org.junit.Test;
 import utilstest.EntityManagerTest;
-import utilstest.UtilsTest;
 
-import static utilstest.UtilsTest.buildCliente;
 import static utilstest.UtilsTest.buildPedido;
 
 public class ManyToOneTest extends EntityManagerTest {

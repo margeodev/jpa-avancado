@@ -1,12 +1,8 @@
-package mapeamentobasico.relacionamentos;
+package relacionamentos;
 
-import model.Cliente;
 import model.Pedido;
-import org.junit.Assert;
 import org.junit.Test;
 import utilstest.EntityManagerTest;
-
-import static utilstest.UtilsTest.buildPedido;
 
 public class EagerLazyTest extends EntityManagerTest {
 

@@ -1,6 +1,5 @@
-package mapeamentobasico.relacionamentos;
+package relacionamentos;
 
-import model.Cliente;
 import model.NotaFiscal;
 import model.PagamentoCartao;
 import model.Pedido;

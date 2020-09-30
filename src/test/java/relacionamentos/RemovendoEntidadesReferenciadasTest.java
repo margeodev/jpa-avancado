@@ -1,6 +1,5 @@
-package mapeamentobasico.relacionamentos;
+package relacionamentos;
 
-import model.Categoria;
 import model.Pedido;
 import org.junit.Assert;
 import org.junit.Test;

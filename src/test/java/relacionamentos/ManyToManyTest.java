@@ -1,16 +1,11 @@
-package mapeamentobasico.relacionamentos;
+package relacionamentos;
 
 import model.Categoria;
-import model.Cliente;
-import model.Pedido;
 import model.Produto;
-import org.junit.Assert;
 import org.junit.Test;
 import utilstest.EntityManagerTest;
 
 import java.util.Arrays;
-
-import static utilstest.UtilsTest.buildPedido;
 
 public class ManyToManyTest extends EntityManagerTest {
 
