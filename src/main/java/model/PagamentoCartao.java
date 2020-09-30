@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "pagamento_cartao")
 public class PagamentoCartao extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 

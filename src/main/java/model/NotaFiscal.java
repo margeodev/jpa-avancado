@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "nota_fiscal")
 public class NotaFiscal extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 

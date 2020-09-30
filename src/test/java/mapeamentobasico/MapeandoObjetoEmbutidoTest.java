@@ -17,6 +17,12 @@ public class MapeandoObjetoEmbutidoTest extends EntityManagerTest {
     @Test
     public void testarMapeamentoEmbutido() {
         Pedido pedido = buildPedido();
+        Cliente cliente = buildCliente();
+        pedido.setCliente(cliente);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(cliente);
+        entityManager.getTransaction().commit();
 
         entityManager.getTransaction().begin();
         entityManager.persist(pedido);

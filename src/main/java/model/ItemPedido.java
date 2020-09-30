@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @Table(name = "item_pedido")
 public class ItemPedido extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "produto_id")
     private Produto produto;
 

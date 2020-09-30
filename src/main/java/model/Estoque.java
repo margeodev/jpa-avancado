@@ -2,8 +2,9 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
@@ -16,8 +17,9 @@ import java.math.BigDecimal;
 @Table(name = "estoque")
 public class Estoque extends BaseEntity {
 
-    @Column(name = "produto_id")
-    private Long produtoId;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
     private BigDecimal quantidade;
 
