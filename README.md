@@ -220,3 +220,22 @@ public class Pedido extends BaseEntity {
     private Cliente cliente;
 }
 ```
+
+## 5. Conhecendo o EntityManager
+### 5.1. Estados e ciclo de vida dos objetos
+As entidades podem passar por 4 estados diferentes:
+* Transient - Estado inicial do objeto quando é criado. Pode ir para Managed
+* Managed - Estado gerenciado do objeto. Pode ir para Detached ou Removed
+* Removed - Objeto em estado para ser removido. Pode ir para Detached ou Managed
+* Detached - Objeto desanexado.
+```
+@Test
+public void analisarEstados() {
+    Cliente cliente = new Cliente(); // Estado Transient
+    Cliente novo = entityManager.merge(cliente); // De transient para Managed
+    Cliente cliente1 = entityManager.find(Cliente.class, 1L); // Estado Managed
+    entityManager.remove(cliente1); // Estado Removed
+    entityManager.persist(cliente1); // De Removed para Managed
+    entityManager.detach(cliente1); // Estado Detached
+}
+```
