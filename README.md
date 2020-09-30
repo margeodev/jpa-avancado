@@ -207,9 +207,9 @@ public void testeComportamento() {
 ```
 
 ### 4.13. Para o que serve o atributo optional?
-Deve ser usado em todos os atributos de uma entidade que ele for obrigatório na hora de salvar. Essa anotação também altera a consulta do relacionamento de left outer join para inner join melhorando o desempenho na consulta. 
+Deve ser usado nos atributos que devem estar salvos antes de salvar a entidade "pai". Essa anotação também altera a consulta do relacionamento de left outer join para inner join melhorando o desempenho na consulta. 
 
-No exemplo de código abaixo, a entidade Pedido só será persistida após a entidade Cliente tiver sido salva. 
+No exemplo de código abaixo, a entidade Pedido (pai) só será persistida após a entidade Cliente já ter sido persistida. 
 
 Pode ser usado nas anotações **@OneToOne** e **@ManyToOne**
 ```
