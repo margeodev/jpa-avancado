@@ -180,4 +180,43 @@ public class Pedido extends BaseEntity {
     private PagamentoCartao pagamentoCartao;
 }
 ```
+Obs: Para o mapeamento **@OneToOne**, opcionalmente também pode ser usada a estratégia de criação de uma outra tabela com o **@JoinTable** como usada no **@ManyToMany**
 
+### 4.12. Entendendo o funcionamento de Eager e Lazy Loading
+Por padrão, os atributos de uma entidade que tem algum relacionamento mas não são listas, são carregados automaticamente na consulta (Eager) e os atributos que são listas não são carregados automaticamente (Lazy), mas podem ser alterados usando o atributo **fetch**. Os atributos lazy só serão carregados na hora que forem usados e só serão carregados uma vez por objeto.
+```
+@Entity
+public class Pedido extends BaseEntity {
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens; //Forma de load padrão: Lazy 
+
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER) //Altera o padrão de leitura do atributo do tipo lista
+    private List<ItemPedido> itens;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente; // Forma de load padrão: Eager 
+  
+}
+
+@Test
+public void testeComportamento() {
+    Pedido pedido = entityManager.find(Pedido.class, 1L);
+    pedido.getItens().isEmpty(); // Faz a segunda consulta ao banco para executar o método isEmpty()
+}
+```
+
+### 4.13. Para o que serve o atributo optional?
+Deve ser usado em todos os atributos de uma entidade que ele for obrigatório na hora de salvar. Essa anotação também altera a consulta do relacionamento de left outer join para inner join melhorando o desempenho na consulta. 
+
+No exemplo de código abaixo, a entidade Pedido só será persistida após a entidade Cliente tiver sido salva. 
+
+Pode ser usado nas anotações **@OneToOne** e **@ManyToOne**
+```
+@Entity
+public class Pedido extends BaseEntity {
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+}
+```
