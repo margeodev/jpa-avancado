@@ -251,11 +251,12 @@ public void verificarCache() {
 ```
 
 ## 5.6. Callbacks para eventos do ciclo de vida
-Callbacks são métodos que podem ser criados, geralmente na classe modelo, a partir de anotações e serão executados de acordo com o ciclo de vida da entidade.
+Callbacks são métodos que podem ser criados na própria entidade a partir de anotações e serão executados de acordo com o ciclo de vida da entidade.
 * @PrePersist - Um método com essa anotação é executado antes do objeto gerenciado ser persistido.
 * @PreUpdate -  Um método com essa anotação é executado antes do objeto gerenciado ser atualizado.
 * @PostPersist -  Um método com essa anotação é executado após do objeto gerenciado ser persistido.
 * @PostUpdate -  Um método com essa anotação é executado após do objeto gerenciado ser atualizado.
+* @PostLoad -  Um método com essa anotação é executado após do objeto gerenciado ser carregado.
 ```
 @PrePersist
 public void aoPersistir() {
@@ -276,4 +277,37 @@ public class Pedido extends BaseEntity {
     private LocalDateTime dataUltimaAtualizacao;
 }
 ```
+## 5.7. Listeners para eventos do ciclo de vida
+São usados para fazer integração entre entidades, ou seja, executar ações em outras entidades após determinados eventos.
+Para criar um listener basta criar uma classe comum com o método que será executado e anotar com alguma anotação de callback, em seguida, a classe que será "escutada" deve ser anotada com **@EntityListeners({ NovaClasseListener.class })**. Dentro da anotação **@EntityListeners** pode ser passado um array de classes do tipo listener.
 
+```
+public class GerarNotaFiscalListener {
+    private NotaFiscalService service = new NotaFiscalService();
+
+    @PrePersist // Callback
+    @PreUpdate // Callback
+    public void gerar(Pedido pedido) {
+        if(pedido.isPago() && pedido.getNotafiscalId() == null) {
+            service.gerar(pedido);
+        }
+    }
+}
+
+@EntityListeners({ GerarNotaFiscalListener.class }) // Informa que o listener GerarNotaFiscalListener está escutando a classe pedido
+@Entity
+@Table(name = "pedido")
+public class Pedido extends BaseEntity {
+    @OneToOne(mappedBy = "pedido")
+    private NotaFiscal notaFiscal;
+   
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
+    public boolean isPago() {
+        return StatusPedido.PAGO.equals(status);
+    }
+}
+
+   
+```
