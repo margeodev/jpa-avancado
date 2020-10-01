@@ -262,3 +262,18 @@ public void aoPersistir() {
     dataCriacao = LocalDateTime.now();
 }
 ```
+Obs: O hibernate já possui anotações que atualizam automaticamente datas de acordo com o ciclo de vida da entidade:
+```
+@Entity
+public class Pedido extends BaseEntity {
+
+    @CreationTimestamp
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
+    
+    @UpdateTimestamp
+    @Column(name = "data_ultima_atualizacao")
+    private LocalDateTime dataUltimaAtualizacao;
+}
+```
+
