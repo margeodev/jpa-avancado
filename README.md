@@ -239,3 +239,75 @@ public void analisarEstados() {
     entityManager.detach(cliente1); // Estado Detached
 }
 ```
+
+### 5.2. Entendendo o cache de primeiro nível
+Uma entidade buscada no banco fica no cache de primeiro nível 
+```
+@Test
+public void verificarCache() {
+    Cliente cliente = entityManager.find(Cliente.class, 1L); // O retorno desse método traz um objeto e deixa ele no cache 1
+    Cliente cliente2 = entityManager.find(Cliente.class, cliente.getId()) // Verifica se o objeto já está em cache, como o objeto está em cache, não faz uma nova consulta ao banco    
+}
+```
+
+## 5.6. Callbacks para eventos do ciclo de vida
+Callbacks são métodos que podem ser criados na própria entidade a partir de anotações e serão executados de acordo com o ciclo de vida da entidade.
+* @PrePersist - Um método com essa anotação é executado antes do objeto gerenciado ser persistido.
+* @PreUpdate -  Um método com essa anotação é executado antes do objeto gerenciado ser atualizado.
+* @PostPersist -  Um método com essa anotação é executado após do objeto gerenciado ser persistido.
+* @PostUpdate -  Um método com essa anotação é executado após do objeto gerenciado ser atualizado.
+* @PostLoad -  Um método com essa anotação é executado após do objeto gerenciado ser carregado.
+```
+@PrePersist
+public void aoPersistir() {
+    dataCriacao = LocalDateTime.now();
+}
+```
+Obs: O hibernate já possui anotações que atualizam automaticamente datas de acordo com o ciclo de vida da entidade:
+```
+@Entity
+public class Pedido extends BaseEntity {
+
+    @CreationTimestamp
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
+    
+    @UpdateTimestamp
+    @Column(name = "data_ultima_atualizacao")
+    private LocalDateTime dataUltimaAtualizacao;
+}
+```
+## 5.7. Listeners para eventos do ciclo de vida
+São usados para fazer integração entre entidades, ou seja, executar ações em outras entidades após determinados eventos.
+Para criar um listener basta criar uma classe comum com o método que será executado e anotar com alguma anotação de callback, em seguida, a classe que será "escutada" deve ser anotada com **@EntityListeners({ NovaClasseListener.class })**. Dentro da anotação **@EntityListeners** pode ser passado um array de classes do tipo listener.
+
+```
+public class GerarNotaFiscalListener {
+    private NotaFiscalService service = new NotaFiscalService();
+
+    @PrePersist // Callback
+    @PreUpdate // Callback
+    public void gerar(Pedido pedido) {
+        if(pedido.isPago() && pedido.getNotafiscalId() == null) {
+            service.gerar(pedido);
+        }
+    }
+}
+
+@EntityListeners({ GerarNotaFiscalListener.class }) // Informa que o listener GerarNotaFiscalListener está escutando a classe pedido
+@Entity
+@Table(name = "pedido")
+public class Pedido extends BaseEntity {
+    @OneToOne(mappedBy = "pedido")
+    private NotaFiscal notaFiscal;
+   
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
+    public boolean isPago() {
+        return StatusPedido.PAGO.equals(status);
+    }
+}
+
+   
+```
