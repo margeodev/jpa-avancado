@@ -1,5 +1,7 @@
 package model;
 
+import listener.GenericListener;
+import listener.GerarNotaFiscalListener;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners({ GenericListener.class })
 @Entity
 @Table(name = "produto")
 public class Produto extends BaseEntity {

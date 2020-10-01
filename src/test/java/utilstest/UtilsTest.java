@@ -25,9 +25,7 @@ public class UtilsTest {
 
     public static Pedido buildPedido() {
         return Pedido.builder()
-                .dataPedido(LocalDateTime.now())
                 .status(StatusPedido.AGUARDANDO)
-                .total(new BigDecimal(1000))
                 .enderecoEntrega(buildEndereco())
                 .build();
     }
