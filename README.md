@@ -308,6 +308,15 @@ public class Pedido extends BaseEntity {
         return StatusPedido.PAGO.equals(status);
     }
 }
-
    
+```
+
+## Mapeamento avançado
+### Conhecendo detalhes da anotação @Column
+```
+@Column(name = "data_criacao", updatable = false) // Impede que o atributo seja atualizado
+private LocalDateTime dataCriacao;
+
+@Column(name = "data_ultima_atualizacao", insertable = false) // Impede que o atributo seja criado manualmente
+private LocalDateTime dataUltimaAtualizacao;
 ```
