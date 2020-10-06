@@ -320,3 +320,28 @@ private LocalDateTime dataCriacao;
 @Column(name = "data_ultima_atualizacao", insertable = false) // Impede que o atributo seja criado manualmente
 private LocalDateTime dataUltimaAtualizacao;
 ```
+
+### 6.5. Mapeando chave composta com @EmbeddedId
+Uma das formas de se mapear uma chave composta é através da anotação **@EmbeddedId**
+* Deve ser criada uma classe que vai guardar os ids que irão compor a chave composta, essa classe deve implementar Serializable.
+* Essa classe deve ser anotada com **@Embeddable**
+* A entidade que terá a chave composta deve ter um atributo do tipo que foi criado e deve ser anotada com **@EmbeddedId**
+
+```
+@Embeddable
+public class ItemPedidoId implements Serializable {
+    @EqualsAndHashCode.Include
+    @Column(name = "pedido_id")
+    private Long pedidoId;
+
+    @EqualsAndHashCode.Include
+    @Column(name = "produto_id")
+    private Long produtoId;
+}
+
+@Entity
+public class ItemPedido {
+    @EmbeddedId
+    private ItemPedidoId id;
+}
+```
