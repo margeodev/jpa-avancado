@@ -11,6 +11,8 @@ public class UtilsTest {
     public static Produto buildProduto() {
         return Produto.builder()
                 .nome("Câmera Canon")
+                .dataCriacao(LocalDateTime.now())
+                .dataUltimaAtualizacao(LocalDateTime.now())
                 .descricao("A melhor definicao para suas fotos")
                 .preco(new BigDecimal(5000))
                 .build();
@@ -30,18 +32,38 @@ public class UtilsTest {
                 .build();
     }
 
-    public static PagamentoCartao buildPagamentoCartao(Pedido pedido) {
-        return PagamentoCartao.builder()
-                .numero("1234")
-                .status(StatusPagamento.PROCESSANDO)
-                .pedido(pedido)
+    public static Pedido buildPedidoCustom(Cliente cliente, Produto produto) {
+        return Pedido.builder()
+                .cliente(cliente)
+                .total(produto.getPreco())
+                .dataCriacao(LocalDateTime.now())
+                .status(StatusPedido.AGUARDANDO)
                 .build();
     }
+
+//    public static ItemPedido buildItemPedido(Pedido pedido, Produto produto) {
+//        return ItemPedido.builder()
+//                .pedidoId(pedido.getId())
+//                .produtoId(produto.getId())
+//                .pedido(pedido)
+//                .produto(produto)
+//                .precoProduto(produto.getPreco())
+//                .quantidade(BigDecimal.ONE)
+//                .build();
+//    }
 
     public static NotaFiscal buildNotaFiscal(Pedido pedido) {
         return NotaFiscal.builder()
                 .xml("TESTE")
                 .dataEmissao(new Date())
+                .pedido(pedido)
+                .build();
+    }
+
+    public static PagamentoCartao buildPagamentoCartao(Pedido pedido) {
+        return PagamentoCartao.builder()
+                .numero("1234")
+                .status(StatusPagamento.PROCESSANDO)
                 .pedido(pedido)
                 .build();
     }

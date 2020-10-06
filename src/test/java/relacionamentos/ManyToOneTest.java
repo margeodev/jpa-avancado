@@ -22,6 +22,6 @@ public class ManyToOneTest extends EntityManagerTest {
 
         entityManager.clear();
         Pedido verificacao = entityManager.find(Pedido.class, pedido.getId());
-        Assert.assertEquals(cliente, pedido.getCliente());
+        Assert.assertEquals(cliente, verificacao.getCliente());
     }
 }
