@@ -36,4 +36,9 @@ public class Produto extends BaseEntity {
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias;
+
+    @ElementCollection
+    @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))
+    @Column(name = "tag")
+    private List<String> tags;
 }
