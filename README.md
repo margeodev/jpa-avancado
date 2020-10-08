@@ -345,3 +345,7 @@ public class ItemPedido {
     private ItemPedidoId id;
 }
 ```
+
+### 6.8. Declarando propriedades transientes com @Transient
+Essa anotação serve para que os atributos de entidades sejam ignorados pelo JPA, ou seja, a tabela não terá a coluna que representaria esse atributo.
+
