@@ -349,3 +349,21 @@ public class ItemPedido {
 ### 6.8. Declarando propriedades transientes com @Transient
 Essa anotação serve para que os atributos de entidades sejam ignorados pelo JPA, ou seja, a tabela não terá a coluna que representaria esse atributo.
 
+
+### 6.9. Mapeando coleções de tipos básicos com @ElementCollection
+De forma similar ao **@ManyToMany**, também cria uma tabela para armazenar as relações, mas ao contrário do manyToMany, não relaciona uma coleção de entidades, apenas tipos básicos como String, int, etc
+
+* A anotação @Column(name = "nome_custom") define o nome da coluna que vai armazenar os nomes que irão se relacionar com o id da tabela principal, caso seja omitida, a coluna vai ter o mesmo nome do atributo, no exemplo abaixo será **tags**
+```
+@Entity
+public class Produto extends BaseEntity {
+    @ElementCollection
+    @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))
+    @Column(name = "tag")
+    private List<String> tags;
+}
+
+
+
+
+
