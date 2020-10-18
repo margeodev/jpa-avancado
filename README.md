@@ -362,8 +362,24 @@ public class Produto extends BaseEntity {
     @Column(name = "tag")
     private List<String> tags;
 }
+```
 
+### 6.10. Mapeando coleções de objetos embutidos com @ElementCollection
+Também é possível usar a anotação **@ElementCollection** Com classes anotadas com **@Embeddable**
+* Deve ser criada uma classe que irá representar a tabela intermediária, essa classe deve estar anotada com **@Embeddable**, os atributos dessa classe se tornarão colunas na tabela.
 
+```
+@Embeddable
+public class Atributo {
+    private String descricao;
+    private String valor;
+}
 
-
+@Entity
+public class Produto extends BaseEntity {
+    @ElementCollection
+    @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produto_id"))
+    private List<Atributo> atributos;
+}
+```
 
