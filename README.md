@@ -383,3 +383,18 @@ public class Produto extends BaseEntity {
 }
 ```
 
+### 6.11. Mapeando mapas com @ElementCollection
+Para mapear um Map, além das anotações **@ElementCollection** e **@CollectionTable** deve ser seguida a seguinte estrutura:
+* @MapKeyColumn(name = "tipo") - Define o nome da coluna que irá exibir o campo CHAVE
+* @Column(name = "descricao") - - Define o nome da coluna que irá exibir o campo VALOR
+
+```
+@Entity
+public class Cliente extends BaseEntity {
+    @ElementCollection
+    @CollectionTable(name = "cliente_contato", joinColumns = @JoinColumn(name = "cliente_id"))
+    @MapKeyColumn(name = "tipo")
+    @Column(name = "descricao")
+    private Map<String, String> contatos;
+}
+```
