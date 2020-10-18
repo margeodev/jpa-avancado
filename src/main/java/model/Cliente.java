@@ -2,11 +2,9 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -21,5 +19,11 @@ public class Cliente extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private SexoCliente sexo;
+
+    @ElementCollection
+    @CollectionTable(name = "cliente_contato", joinColumns = @JoinColumn(name = "cliente_id"))
+    @MapKeyColumn(name = "tipo")
+    @Column(name = "descricao")
+    private Map<String, String> contatos;
 
 }
