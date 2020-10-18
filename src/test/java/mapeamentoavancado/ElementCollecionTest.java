@@ -24,4 +24,18 @@ public class ElementCollecionTest extends EntityManagerTest {
         Produto check = entityManager.find(Produto.class, produto.getId());
         Assert.assertFalse(check.getTags().isEmpty());
     }
+
+    @Test
+    public void aplicarAtributos() {
+        entityManager.getTransaction().begin();
+        Produto produto = entityManager.find(Produto.class, 1L);
+        produto.setAtributos(Arrays.asList(new Atributo("tela", "800x600")));
+
+        entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        Produto check = entityManager.find(Produto.class, produto.getId());
+        Assert.assertFalse(check.getAtributos().isEmpty());
+    }
 }
