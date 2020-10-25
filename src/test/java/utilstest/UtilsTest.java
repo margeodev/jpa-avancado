@@ -52,13 +52,13 @@ public class UtilsTest {
 //                .build();
 //    }
 
-    public static NotaFiscal buildNotaFiscal(Pedido pedido) {
-        return NotaFiscal.builder()
-                .xml("TESTE")
-                .dataEmissao(new Date())
-                .pedido(pedido)
-                .build();
-    }
+//    public static NotaFiscal buildNotaFiscal(Pedido pedido) {
+//        return NotaFiscal.builder()
+//                .xml("TESTE")
+//                .dataEmissao(new Date())
+//                .pedido(pedido)
+//                .build();
+//    }
 
     public static PagamentoCartao buildPagamentoCartao(Pedido pedido) {
         return PagamentoCartao.builder()

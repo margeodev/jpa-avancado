@@ -26,18 +26,18 @@ public class OneToOneTest extends EntityManagerTest {
         Assert.assertEquals(pagamento, verificacao.getPagamentoCartao());
     }
 
-    @Test
-    public void testeNotaFiscal() {
-        Pedido pedido = entityManager.find(Pedido.class, 1L);
-
-        NotaFiscal notaFiscal = buildNotaFiscal(pedido);
-
-        entityManager.getTransaction().begin();
-        entityManager.persist(notaFiscal);
-        entityManager.getTransaction().commit();
-
-        entityManager.clear();
-        NotaFiscal verificacao = entityManager.find(NotaFiscal.class, notaFiscal.getId());
-        Assert.assertEquals(pedido, verificacao.getPedido());
-    }
+//    @Test
+//    public void testeNotaFiscal() {
+//        Pedido pedido = entityManager.find(Pedido.class, 1L);
+//
+//        NotaFiscal notaFiscal = buildNotaFiscal(pedido);
+//
+//        entityManager.getTransaction().begin();
+//        entityManager.persist(notaFiscal);
+//        entityManager.getTransaction().commit();
+//
+//        entityManager.clear();
+//        NotaFiscal verificacao = entityManager.find(NotaFiscal.class, notaFiscal.getId());
+//        Assert.assertEquals(pedido, verificacao.getPedido());
+//    }
 }
