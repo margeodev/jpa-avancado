@@ -398,3 +398,13 @@ public class Cliente extends BaseEntity {
     private Map<String, String> contatos;
 }
 ```
+### 6.12. Mapeando e persistindo dados de arquivos com @Lob
+Permite salvar um arquivo no banco transformando ele em um array de bytes
+
+```
+@Entity
+public class NotaFiscal extends BaseEntity {
+    @Lob
+    private byte[] xml;
+}
+```
