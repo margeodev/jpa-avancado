@@ -410,7 +410,7 @@ public class NotaFiscal extends BaseEntity {
 ```
 
 ### 6.14. Mapeando tabela secundária com @SecondaryTable
-O uso dessa anotação permite que seja usada uma tabela secundária para salvar atributos, a anotação na classe define o nome da tabela e o atributo chave do relacionamento, para definir as outras colunas dessa tabela basta informar o nome da tabela com a propriedade **table** da anotação **@Column** no atributo e automaticamente o jpa irá relacionar esse atributo com a tabela secundária.
+Essa anotação torna possível mapear mais de uma tabela numa mesma entidade, a anotação na classe define o nome da tabela e o atributo chave do relacionamento, para definir as outras colunas dessa tabela basta informar o nome da tabela com a propriedade **table** da anotação **@Column** no atributo e automaticamente o jpa irá relacionar esse atributo com a tabela secundária.
 
 ```
 @Entity
