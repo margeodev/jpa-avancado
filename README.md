@@ -422,3 +422,16 @@ public class Cliente extends BaseEntity {
 }
 ```
 
+### 6.15. Mapeando herança com @MappedSuperclass
+Permite trabalhar com herança para atributos de chaves primárias
+
+```
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@MappedSuperclass
+public class BaseEntity {
+    @EqualsAndHashCode.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+}
+```
