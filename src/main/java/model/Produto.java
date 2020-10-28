@@ -16,7 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @EntityListeners({ GenericListener.class })
 @Entity
-@Table(name = "produto")
+@Table(name = "produto",
+        uniqueConstraints = { @UniqueConstraint(name = "unq_nome", columnNames = { "nome" }) },
+        indexes = { @Index(name = "idx_nome", columnList = "nome") })
 public class Produto extends BaseEntity {
 
     private String nome;
