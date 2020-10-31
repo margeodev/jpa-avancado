@@ -3,8 +3,7 @@ package model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Getter
@@ -23,8 +22,10 @@ public class Cliente extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private SexoCliente sexo;
 
-    @Column(table = "cliente_detalhe", name = "data_nascimento")
-    private Date dataNascimento;
+    private String cpf;
+
+    @Column(name = "data_nascimento", table = "cliente_detalhe")
+    private LocalDate dataNascimento;
 
     @ElementCollection
     @CollectionTable(name = "cliente_contato", joinColumns = @JoinColumn(name = "cliente_id"))

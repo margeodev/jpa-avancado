@@ -34,7 +34,7 @@ public class Pedido extends BaseEntity {
 
     private BigDecimal total;
 
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
 
     @ManyToOne(optional = false)
