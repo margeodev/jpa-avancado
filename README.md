@@ -435,3 +435,16 @@ public class BaseEntity {
     private Long id;
 }
 ```
+
+## Operações em Cascata
+### 8.2. Fazendo inserções de objetos em cascata
+Permite que um objeto em estado transiente seja salvo através do atributo cascade = CascadeType.ALL/PERSIST
+```
+@Entity
+public class Pedido extends BaseEntity {
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+}
+```
+No trecho de código acima, quando a entidade Pedido for persistida, automaticamente o atributo cliente, que também é uma entidade, será salvo.
