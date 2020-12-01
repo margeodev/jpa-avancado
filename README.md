@@ -448,3 +448,15 @@ public class Pedido extends BaseEntity {
 }
 ```
 No trecho de código acima, quando a entidade Pedido for persistida, automaticamente o atributo cliente, que também é uma entidade, será salvo.
+
+### 8.8. Removendo objetos órfãos com a propriedade orphanRemoval
+Essa propriedade faz entidades que são mapeadas com **@OneToMany** e **@OneToOne** excluir entidades que são dependentes de forma automática, ou seja, uma entidade pai que tenha uma lista de entidades filhas, ao ser excluída também excluirá a lista de filhas da base.
+
+Obs: Nos casos de alteração da classe pai sem que haja necessariamente a exclusão, também deve ser usada a propriedade **CascadeType.PERSIST**
+```
+@Entity
+public class Pedido extends BaseEntity { 
+    @OneToMany(mappedBy = "pedido", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private List<ItemPedido> itens;	
+}
+```
