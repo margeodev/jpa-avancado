@@ -34,7 +34,7 @@ public class Pedido extends BaseEntity {
 
     private BigDecimal total;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<ItemPedido> itens;
 
     @ManyToOne(optional = false)
@@ -65,10 +65,13 @@ public class Pedido extends BaseEntity {
     public boolean isPago() {
         return StatusPedido.PAGO.equals(status);
     }
+
     private void calcularTotal() {
         if(Objects.nonNull(itens)) {
-            total = itens.stream().map(ItemPedido::getPrecoProduto)
+            total = itens.stream().map(i -> i.getQuantidade().multiply(i.getPrecoProduto()))
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
+        } else {
+            total = BigDecimal.ZERO;
         }
     }
 }
