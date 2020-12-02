@@ -437,6 +437,8 @@ public class BaseEntity {
 ```
 
 ## Operações em Cascata
+Antes de definir operações em cascata é necessário analizar o nível de vínculo que as entidades envolvidas têm, quanto mais vinculadas mais propício o uso
+
 ### 8.2. Fazendo inserções de objetos em cascata
 Permite que um objeto em estado transiente seja salvo através do atributo cascade = CascadeType.ALL/PERSIST
 ```
@@ -459,4 +461,16 @@ public class Pedido extends BaseEntity {
     @OneToMany(mappedBy = "pedido", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<ItemPedido> itens;	
 }
+```
+
+## 9. JPQL do básico ao avançado
+### Entendendo as diferenças entre TypedQuery e Query
+
+Uma das vantagem de usar TypedQuery é que ele dispensa o cast nas consulta.
+```
+TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+Pedido p1 = typedQuery.getSingleResult();
+
+Query query = entityManager.createQuery(jpql);
+Pedido p2 = (Pedido) query.getSingleResult();
 ```
