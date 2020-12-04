@@ -474,3 +474,13 @@ Pedido p1 = typedQuery.getSingleResult();
 Query query = entityManager.createQuery(jpql);
 Pedido p2 = (Pedido) query.getSingleResult();
 ```
+### 9.3. Selecionando um atributo da entidade como retorno da consulta
+```
+String jpql = "select p.nome from Produto p";
+TypedQuery<String> typedQuery = entityManager.createQuery(jpql, String.class);
+List<String> lista = typedQuery.getResultList();
+        
+String jpql2 = "select p.cliente from Pedido p";
+TypedQuery<Cliente> typedQuery2 = entityManager.createQuery(jpql2, Cliente.class);
+List<Cliente> clientes = typedQuery2.getResultList();        
+```
