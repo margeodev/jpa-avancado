@@ -484,3 +484,10 @@ String jpql2 = "select p.cliente from Pedido p";
 TypedQuery<Cliente> typedQuery2 = entityManager.createQuery(jpql2, Cliente.class);
 List<Cliente> clientes = typedQuery2.getResultList();        
 ```
+
+### 9.4. Trabalhando com projeções
+É uma forma de buscar os atributos específicos de uma entidade
+```
+String jpql = "select id, nome from Produto";
+TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
+```

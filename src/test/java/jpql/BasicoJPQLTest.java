@@ -37,4 +37,12 @@ public class BasicoJPQLTest extends EntityManagerTest {
         List<Cliente> clientes = typedQuery2.getResultList();
         Assert.assertTrue(Cliente.class.equals(clientes.get(0).getClass()));
     }
+
+    @Test
+    public void projetarOResultado() {
+        String jpql = "select id, nome from Produto";
+        TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
+        List<Object[]> lista = typedQuery.getResultList();
+        Assert.assertTrue(lista.get(0).length == 2);
+    }
 }
