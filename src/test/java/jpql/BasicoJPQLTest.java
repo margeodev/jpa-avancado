@@ -1,6 +1,6 @@
 package jpql;
 
-import com.sun.source.tree.AssertTree;
+import dto.ProdutoDTO;
 import model.Cliente;
 import model.Pedido;
 import org.junit.Assert;
@@ -44,5 +44,14 @@ public class BasicoJPQLTest extends EntityManagerTest {
         TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
         List<Object[]> lista = typedQuery.getResultList();
         Assert.assertTrue(lista.get(0).length == 2);
+    }
+
+    @Test
+    public void projetarNoDTO() {
+        String jpql = "select new dto.ProdutoDTO(id, nome) from Produto";
+
+        TypedQuery<ProdutoDTO> typedQuery = entityManager.createQuery(jpql, ProdutoDTO.class);
+        List<ProdutoDTO> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
     }
 }

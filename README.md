@@ -491,3 +491,16 @@ List<Cliente> clientes = typedQuery2.getResultList();
 String jpql = "select id, nome from Produto";
 TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
 ```
+
+### 9.5. Trabalhando com projeções e DTO
+Para usar um DTO numa consulta jpql basta usar o caminho absoluto do DTO na consulta passando o construtor padrão para a consulta
+```
+@Test
+public void projetarNoDTO() {
+    String jpql = "select new dto.ProdutoDTO(id, nome) from Produto";
+
+    TypedQuery<ProdutoDTO> typedQuery = entityManager.createQuery(jpql, ProdutoDTO.class);
+    List<ProdutoDTO> lista = typedQuery.getResultList();
+    Assert.assertFalse(lista.isEmpty());
+}
+```
