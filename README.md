@@ -476,31 +476,47 @@ Pedido p2 = (Pedido) query.getSingleResult();
 ```
 ### 9.3. Selecionando um atributo da entidade como retorno da consulta
 ```
-String jpql = "select p.nome from Produto p";
+String jpql = "SELECT p.nome FROM Produto p";
 TypedQuery<String> typedQuery = entityManager.createQuery(jpql, String.class);
 List<String> lista = typedQuery.getResultList();
         
-String jpql2 = "select p.cliente from Pedido p";
+String jpql2 = "SELECT p.cliente FROM Pedido p";
 TypedQuery<Cliente> typedQuery2 = entityManager.createQuery(jpql2, Cliente.class);
 List<Cliente> clientes = typedQuery2.getResultList();        
 ```
 
 ### 9.4. Trabalhando com projeções
-É uma forma de buscar os atributos específicos de uma entidade
+Retorna uma lista de objetos que serão criados de forma dinâmica, no exemplo abaixo o JPA irá criar um objeto contendo as propriedades id e nome
 ```
-String jpql = "select id, nome from Produto";
+String jpql = "SELECT id, nome FROM Produto";
 TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
 ```
 
 ### 9.5. Trabalhando com projeções e DTO
-Para usar um DTO numa consulta jpql basta usar o caminho absoluto do DTO na consulta passando o construtor padrão para a consulta
+Uma forma alternativa a criação de objetos de forma dinâmica para serem retornados, é usar um DTO que já irá conter todas as propriedades que serão buscadas, essas propriedades devem estar no construtor do DTO
+Obs: DEVE ser usado o caminho absoluto do DTO na consulta passando o construtor padrão para a consulta
 ```
 @Test
 public void projetarNoDTO() {
-    String jpql = "select new dto.ProdutoDTO(id, nome) from Produto";
+    String jpql = "SELECT new dto.ProdutoDTO(id, nome) FROM Produto";
 
     TypedQuery<ProdutoDTO> typedQuery = entityManager.createQuery(jpql, ProdutoDTO.class);
     List<ProdutoDTO> lista = typedQuery.getResultList();
     Assert.assertFalse(lista.isEmpty());
 }
+```
+
+### 9.6. Fazendo inner join entre as entidades
+Join simples
+Retorna uma lista de atributos, no exemplo abaixo, de Pedido e faz o join adicionando de forma implícita o ON.
+```
+String jpql = "SELECT p FROM Pedido p JOIN p.pagamento pag";
+```
+Join com projeções
+```
+String jpql = "SELECT p, pag FROM Pedido p JOIN p.pagamento pag";
+```
+Join com cláusula WHERE
+```
+String jpql = "SELECT p, pag FROM Pedido p JOIN p.pagamento pag WHERE pag.status = 'PROCESSANDO'";
 ```
