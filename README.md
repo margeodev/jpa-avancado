@@ -520,3 +520,9 @@ Join com cláusula WHERE
 ```
 String jpql = "SELECT p, pag FROM Pedido p JOIN p.pagamento pag WHERE pag.status = 'PROCESSANDO'";
 ```
+
+### 9.7. Usando left outer join
+O left join irá trazer as colunas da tabela da esquerda e da direita. A tabela da esquerda virá com todos os registros independente de ter vínculo com a tabela da direita, a tabela da direita só trará os registros que tem vínculo com a tabela da direita.
+```
+String jpql = "SELECT p from Pedido (tab esq) p LEFT JOIN p.pagamento pag (tab dir)"
+```

@@ -15,7 +15,7 @@ public class JoinTest extends EntityManagerTest {
 
     @Test
     public void fazerJoin() {
-        String jpql = "SELECT p, i FROM Pedido p JOIN p.itens i";
+        String jpql = "SELECT p, i.precoProduto FROM Pedido p LEFT JOIN p.itens i";
         TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
         List<Object[]> lista = typedQuery.getResultList();
 
