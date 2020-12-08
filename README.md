@@ -524,10 +524,19 @@ String jpql = "SELECT p, pag FROM Pedido p JOIN p.pagamento pag WHERE pag.status
 ### 9.7. Usando left outer join
 O left join irá trazer as colunas da tabela da esquerda e da direita. A tabela da esquerda virá com todos os registros independente de ter vínculo com a tabela da direita, a tabela da direita só trará os registros que tem vínculo com a tabela da direita.
 ```
-String jpql = "SELECT p from Pedido (tab esq) p LEFT JOIN p.pagamento pag (tab dir)"
+String jpql = "SELECT p FROM Pedido (tab esq) p LEFT JOIN p.pagamento pag (tab dir)"
 ```
 
 ### 9.9. Entendendo as Path Expressions
  ```
- String jpql = "SELECT p.cliente.nome from Pedido p";
+ String jpql = "SELECT p.cliente.nome FROM Pedido p";
+```
+
+### 9.11. Passando parâmetros para as consultas
+É possível passar parâmetros informando a posição do parâmetro ou através de uma string.
+```
+String jpql = "SELECT p FROM Pedido p JOIN p.pagamento pag WHERE p.id = :pedidoId AND pag.status = ?1";
+TypedQuery<Pedido> tyepedQuery = entityManager.createQuery(jpql, Pedido.class);
+typedQuery.setParameter("pedidoId", 2L); // Passa parâmetro por string
+typedQuery.setParameter(1, StatusPagamento.PROCESSANDO); // Passa parâmetro por posição
 ```

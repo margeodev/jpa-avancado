@@ -41,6 +41,9 @@ public class Pedido extends BaseEntity {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @OneToOne(mappedBy = "pedido")
+    private Pagamento pagamento;
+
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
