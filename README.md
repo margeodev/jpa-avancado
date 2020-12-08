@@ -526,3 +526,8 @@ O left join irá trazer as colunas da tabela da esquerda e da direita. A tabela 
 ```
 String jpql = "SELECT p from Pedido (tab esq) p LEFT JOIN p.pagamento pag (tab dir)"
 ```
+
+### 9.9. Entendendo as Path Expressions
+ ```
+ String jpql = "SELECT p.cliente.nome from Pedido p";
+```
