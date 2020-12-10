@@ -548,3 +548,11 @@ String jpql = "SELECT c FROM Cliente c WHERE c.nome LIKE CONCAT('%', :nome)"; //
 String jpql = "SELECT c FROM Cliente c WHERE c.nome LIKE CONCAT(:nome, '%')"; // Pesquisa por nomes que iniciam com a string passada.
 String jpql = "SELECT c FROM Cliente c WHERE c.nome LIKE CONCAT('%', :nome, '%')"; // Pesquisa por nomes que contenha a string passada, seja no início ou no final.
 ```
+
+### 9.13. Usando expressões condicionais is null e is empty
+```
+String jpql = "SELECT p FROM Produto p WHERE p.categorias IS EMPTY";
+String jpql = "SELECT p FROM Produto p WHERE p.categorias IS NOT EMPTY";
+String jpql = "SELECT p FROM Produto p WHERE p.foto IS NULL";
+String jpql = "SELECT p FROM Produto p WHERE p.foto IS NOT NULL";
+```
