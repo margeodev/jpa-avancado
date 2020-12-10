@@ -540,3 +540,11 @@ TypedQuery<Pedido> tyepedQuery = entityManager.createQuery(jpql, Pedido.class);
 typedQuery.setParameter("pedidoId", 2L); // Passa parâmetro por string
 typedQuery.setParameter(1, StatusPagamento.PROCESSANDO); // Passa parâmetro por posição
 ```
+
+### 9.12. Usando expressão condicional like
+O like permite pesquisar por textos em um atributo, preferencialmente deve ser usado junto com o '%' que é o caractere coringa.
+```
+String jpql = "SELECT c FROM Cliente c WHERE c.nome LIKE CONCAT('%', :nome)"; // Pesquisa por nomes que terminam com a string passada.
+String jpql = "SELECT c FROM Cliente c WHERE c.nome LIKE CONCAT(:nome, '%')"; // Pesquisa por nomes que iniciam com a string passada.
+String jpql = "SELECT c FROM Cliente c WHERE c.nome LIKE CONCAT('%', :nome, '%')"; // Pesquisa por nomes que contenha a string passada, seja no início ou no final.
+```
