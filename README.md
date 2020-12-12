@@ -576,3 +576,8 @@ String jpql = "SELECT p FROM Pedido p WHERE p.dataCriacao BETWEEN :dataInicial A
 ```
 String jpql = "SELECT p FROM Produto p WHERE p.preco <> :preco";
 ```
+
+### 9.19. Ordenando os resultados da consulta
+```
+String jpql = "SELECT c FROM Cliente c ORDER BY c.nome DESC";
+```
