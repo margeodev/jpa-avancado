@@ -558,9 +558,16 @@ String jpql = "SELECT p FROM Produto p WHERE p.foto IS NOT NULL";
 ```
 
 ### 9.14. Usando expressões condicionais de maior e menor
+Podem ser usados com números e datas.
 ```
 String jpql = "SELECT p FROM Produto p WHERE p.preco > :preco";
 String jpql = "SELECT p FROM Produto p WHERE p.preco >= :preco";
 String jpql = "SELECT p FROM Produto p WHERE p.preco < :preco";
 String jpql = "SELECT p FROM Produto p WHERE p.preco <= :preco";
+```
+
+### 9.16. Usando expressão condicional between
+O **between** é equivalente a usar ">= AND <="
+```
+String jpql = "SELECT p FROM Pedido p WHERE p.dataCriacao BETWEEN :dataInicial AND :dataFinal";
 ```
