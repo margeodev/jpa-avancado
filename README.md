@@ -571,3 +571,8 @@ O **between** é equivalente a usar ">= AND <="
 ```
 String jpql = "SELECT p FROM Pedido p WHERE p.dataCriacao BETWEEN :dataInicial AND :dataFinal";
 ```
+
+### 9.17. Usando expressão de diferente
+```
+String jpql = "SELECT p FROM Produto p WHERE p.preco <> :preco";
+```
