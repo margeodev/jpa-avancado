@@ -556,3 +556,11 @@ String jpql = "SELECT p FROM Produto p WHERE p.categorias IS NOT EMPTY";
 String jpql = "SELECT p FROM Produto p WHERE p.foto IS NULL";
 String jpql = "SELECT p FROM Produto p WHERE p.foto IS NOT NULL";
 ```
+
+### 9.14. Usando expressões condicionais de maior e menor
+```
+String jpql = "SELECT p FROM Produto p WHERE p.preco > :preco";
+String jpql = "SELECT p FROM Produto p WHERE p.preco >= :preco";
+String jpql = "SELECT p FROM Produto p WHERE p.preco < :preco";
+String jpql = "SELECT p FROM Produto p WHERE p.preco <= :preco";
+```
