@@ -581,3 +581,13 @@ String jpql = "SELECT p FROM Produto p WHERE p.preco <> :preco";
 ```
 String jpql = "SELECT c FROM Cliente c ORDER BY c.nome DESC";
 ```
+
+### 9.20. Fazendo paginação de resultados
+O first resulta usa a fórmula:
+
+FIRST_RESULT = MAX_RESULTS * (pagina -1)
+```
+String jpql = "SELECT c FROM Cliente c ORDER BY c.nome DESC";
+typedQuery.setFirstResult(0) // Define o número da página pesquisada, esse valor vem por parâmetro do nagevador.
+typedQuery.setMaxResult(x) // Define a quantidade de linhas por página
+```
