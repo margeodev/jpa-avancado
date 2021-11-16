@@ -180,7 +180,10 @@ public class Pedido extends BaseEntity {
     private PagamentoCartao pagamentoCartao;
 }
 ```
-Obs: Para o mapeamento **@OneToOne**, opcionalmente também pode ser usada a estratégia de criação de uma outra tabela com o **@JoinTable** como usada no **@ManyToMany**
+Obs 1: Para o mapeamento **@OneToOne**, opcionalmente também pode ser usada a estratégia de criação de uma outra tabela com o **@JoinTable** como usada no **@ManyToMany**
+
+Obs 2: Podemos automatizar as operações de inclusão, exclusão e edição da entidade non-owner com o atributo: 
+```@OneToOne(cascade = CascadeType.ALL)```
 
 ### 4.12. Entendendo o funcionamento de Eager e Lazy Loading
 Por padrão, os atributos de uma entidade que tem algum relacionamento mas não são listas, são carregados automaticamente na consulta (Eager) e os atributos que são listas não são carregados automaticamente (Lazy), mas podem ser alterados usando o atributo **fetch**. Os atributos lazy só serão carregados na hora que forem usados e só serão carregados uma vez por objeto.
